@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Grid Test</title>
+<style>
+body{font-family:-apple-system,sans-serif;padding:10px;background:#faf6ed}
+.box{background:#fff;padding:10px;margin:8px 0;border:1px solid #ddd}
+h4{font-size:12px;margin:0 0 5px}
+</style></head>
+<body>
+<h3>测试A：纯文字</h3>
+<div class="box">这是一段测试中文。如果你能看到这句话且文字正常，说明基础渲染OK。</div>
+
+<h3>测试B：4列Grid + 纯文字</h3>
+<div class="box" style="display:grid;grid-template-columns:repeat(4,1fr);gap:5px">
+  <div>第一列</div><div>第二列</div><div>第三列</div><div>第四列</div>
+</div>
+
+<h3>测试C：4列Grid + 中文</h3>
+<div class="box" style="display:grid;grid-template-columns:repeat(4,1fr);gap:5px">
+  <div style="background:#3a7d44;color:#fff;padding:10px;text-align:center;border-radius:13px;font-size:21px">甲</div>
+  <div style="background:#c44a3a;color:#fff;padding:10px;text-align:center;border-radius:13px;font-size:21px">丙</div>
+  <div style="background:#a07830;color:#fff;padding:10px;text-align:center;border-radius:13px;font-size:21px">戊</div>
+  <div style="background:#2a5d8a;color:#fff;padding:10px;text-align:center;border-radius:13px;font-size:21px">壬</div>
+</div>
+
+<h3>测试D：8列Grid + 中文</h3>
+<div class="box" style="display:grid;grid-template-columns:repeat(8,1fr);gap:3px">
+  <div style="font-size:9px;text-align:center">甲</div><div style="font-size:9px;text-align:center">乙</div>
+  <div style="font-size:9px;text-align:center">丙</div><div style="font-size:9px;text-align:center">丁</div>
+  <div style="font-size:9px;text-align:center">戊</div><div style="font-size:9px;text-align:center">己</div>
+  <div style="font-size:9px;text-align:center">庚</div><div style="font-size:9px;text-align:center">辛</div>
+</div>
+
+<p style="font-size:9px;color:#999">请拍截图告诉我哪个测试项出现了乱码</p>
+</body>
+</html>
