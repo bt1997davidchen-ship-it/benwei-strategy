@@ -14,7 +14,7 @@
   --blue:#0d2e4d;--blight:#e0edf8;
   --bg:#fdfaf5;--s:#fffef9;--border:#e8ddd0;
   --r:14px;--r2:9px;
-  font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;
+  font-family:'PingFang SC','Noto Serif SC','Microsoft YaHei',system-ui,sans-serif;
   font-size:14px;color:var(--ink);
 }
 body{background:#f0ece6;display:flex;justify-content:center;padding:20px 10px 60px;min-height:100vh}
@@ -215,9 +215,9 @@ body{background:#f0ece6;display:flex;justify-content:center;padding:20px 10px 60
 </head>
 <body>
 
-<div id="overlay-root" style="position:fixed;top:0;left:0;width:100%;height:100%;z-index:900;pointer-events:auto">
+<div id="overlay-root" style="position:fixed;top:0;left:0;width:100%;height:100%;z-index:900;pointer-events:none">
 <!-- ══════════ 知予问候页 ══════════ -->
-<div id="screen-greet" style="position:absolute;top:0;left:0;right:0;bottom:0;width:100%;height:100%;background:#1a1410;display:flex;flex-direction:column;align-items:center;justify-content:space-between;overflow:hidden;box-sizing:border-box;pointer-events:auto">
+<div id="screen-greet" style="position:absolute;top:0;left:0;right:0;bottom:0;width:100%;height:100%;background:#1a1410;display:flex;flex-direction:column;align-items:center;justify-content:space-between;overflow:hidden;box-sizing:border-box">
 
   <!-- 背景光晕 -->
   <div style="position:absolute;width:420px;height:420px;border-radius:50%;background:radial-gradient(circle,rgba(160,120,48,.22),transparent);top:-130px;left:-100px;filter:blur(80px);pointer-events:none"></div>
@@ -266,7 +266,7 @@ body{background:#f0ece6;display:flex;justify-content:center;padding:20px 10px 60
 
   <!-- 底部按钮 -->
   <div style="width:100%;padding:0 24px 44px;position:relative;z-index:2;display:flex;flex-direction:column;gap:10px;box-sizing:border-box">
-    <button onclick="enterHome()" style="width:100%;height:52px;background:linear-gradient(135deg,#a07830,#c4a050);pointer-events:auto;touch-action:manipulation;-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none;border:none;border-radius:14px;color:#0f0d0b;font-size:15px;font-weight:600;letter-spacing:.08em;font-family:inherit;cursor:pointer;position:relative;overflow:hidden">
+    <button onclick="enterHome()" style="width:100%;height:52px;background:linear-gradient(135deg,#a07830,#c4a050);border:none;border-radius:14px;color:#0f0d0b;font-size:15px;font-weight:600;letter-spacing:.08em;font-family:inherit;cursor:pointer;position:relative;overflow:hidden">
       <span style="position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.15),transparent)"></span>
       进入本位战略
     </button>
@@ -279,7 +279,7 @@ body{background:#f0ece6;display:flex;justify-content:center;padding:20px 10px 60
 </style>
 
 <!-- ══════════ 主导航页 ══════════ -->
-<div id="screen-home" style="position:absolute;top:0;left:0;right:0;bottom:0;width:100%;height:100%;background:#faf6ed;display:none;flex-direction:column;overflow-y:auto;-webkit-overflow-scrolling:touch;box-sizing:border-box;pointer-events:auto">
+<div id="screen-home" style="position:absolute;top:0;left:0;right:0;bottom:0;width:100%;height:100%;background:#faf6ed;display:none;flex-direction:column;overflow-y:auto;-webkit-overflow-scrolling:touch;box-sizing:border-box">
 
   <!-- Header 深色 -->
   <div style="background:#1a1410;padding:52px 16px 20px;position:relative;overflow:hidden;flex-shrink:0;box-sizing:border-box">
@@ -698,7 +698,7 @@ body{background:#f0ece6;display:flex;justify-content:center;padding:20px 10px 60
   <div class="g4" style="margin-bottom:6px">
     <div class="fg"><label>出生时辰</label><select id="ap-hour"></select></div>
     <div class="fg"><label>当前公历年</label><input type="number" id="ap-current-year" value="2026" min="1900" max="2100"></div>
-    <div class="fg" style="grid-column:span 2"><label>&nbsp;</label><button class="btn-primary" onclick="autoPaipan()" style="background:var(--blue);color:var(--gold2);font-size:12px;padding:8px">⟳ 自动推演 → 填入下方</button></div>
+    <div class="fg" style="grid-column:span 2"><label>&nbsp;</label><button class="btn-primary" onclick="autoPaipan()" style="background:var(--blue);color:#fff;font-size:12px;padding:8px">⟳ 自动推演 → 填入下方</button></div>
   </div>
 
   <div class="sec" style="margin-top:4px">图谱四柱（可手动微调）</div>
@@ -935,7 +935,7 @@ body{background:#f0ece6;display:flex;justify-content:center;padding:20px 10px 60
       <div style="display:flex;gap:8px;align-items:center;margin-bottom:8px;flex-wrap:wrap">
         <label style="font-size:11px;color:var(--ink3)">中心年</label>
         <input type="number" id="trend-center-year" value="2026" min="1900" max="2100" style="width:80px;font-size:12px;padding:5px 8px;border:1px solid var(--border);border-radius:var(--r2);background:var(--bg);color:var(--ink);outline:none">
-        <button class="btn-primary" style="width:auto;padding:5px 12px;font-size:11px;margin:0;background:var(--blue);color:var(--gold2)" onclick="renderTrendChart()">⟳ 重算</button>
+        <button class="btn-primary" style="width:auto;padding:5px 12px;font-size:11px;margin:0;background:var(--blue);color:#fff" onclick="renderTrendChart()">⟳ 重算</button>
       </div>
       <div id="trend-chart" style="margin-bottom:8px"></div>
       <div id="trend-stats"></div>
@@ -7380,11 +7380,11 @@ function initGreetScreen(){
   // Fortune hint with today's ganzhi
   document.getElementById('sg-ftxt').innerHTML=
     `今日<strong>${gzData.tg}${gzData.dz}日</strong>——完成图谱推演后，知予将为你解读今日时势对心性的影响。`;
-  // Greeting text - static display (no typewriter animation for mobile compatibility)
+  // Greeting text typewriter
   const gi=Math.floor(Date.now()/86400000)%SG_LINES.length;
   const el=document.getElementById('sg-btxt');
-  const lines=SG_LINES[gi];
-  el.innerHTML=lines.map(function(l){ return l; }).join('<br>')+'<span id="sg-cursor" style="display:inline-block;width:2px;height:13px;background:#c4a050;margin-left:1px;vertical-align:text-bottom;animation:sgblink 1s step-end infinite"></span>';
+  el.innerHTML='<span class="sg-tcursor"></span>';
+  setTimeout(()=>typeText(el,SG_LINES[gi],0,0,null), 800);
   spawnParticles();
   // Home screen ganzhi
   document.getElementById('sh-gz').textContent=gzData.tg+gzData.dz;
