@@ -14,7 +14,7 @@
 body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;font-size:14px;color:var(--ink);background:#f0ece6;padding:0;min-height:100vh}
 
 /* ── Greeting ── */
-#greeting{background:#1a1410;color:#fff;padding:52px 20px 20px;text-align:center;position:relative;overflow:hidden;height:100vh;display:flex;flex-direction:column;justify-content:space-between;align-items:center}
+#greeting{background:#1a1410;color:#fff;padding:52px 20px 20px;text-align:center;position:relative;overflow:hidden;height:100vh;height:100dvh;display:flex;flex-direction:column;justify-content:space-between;align-items:center}
 #greeting .g-body{flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center}
 #greeting .g-footer{padding-bottom:10px}
 #greeting .g-scroll-hint{font-size:11px;color:rgba(255,255,255,.18);margin-top:4px}
@@ -202,6 +202,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','Hiragino Sans G
 
   <button class="btn-primary" onclick="computeAndUpdate()">推演心性图谱 →</button>
 
+  <div id="goto-yunshi-wrap" style="display:none;margin-top:10px">
+    <button class="btn-primary" style="background:var(--ink);color:var(--gold2);border:1px solid var(--gold);font-size:13px" onclick="switchTab('tp7',document.querySelectorAll('.tab-btn')[6])">→ 进入「时势方向」查看完整图谱查询系统</button>
+  </div>
+
   <div id="r1" style="display:none">
     <div class="sec" style="margin-top:14px">图谱四柱</div>
     <div class="g4" id="panzhen"></div>
@@ -274,7 +278,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','Hiragino Sans G
     <div id="zhongdao-type"></div>
     <div class="sec">第二层 · 动态扰动</div>
     <div class="gauge-wrap">
-      <div class="gauge-lbl">主轴偏离度（当前年度）</div>
+      <div class="gauge-lbl" id="zd-gauge-lbl">主轴偏离度（当前年度）</div>
       <div id="zd-gauge-arc"></div>
       <div class="gauge-num" id="zd-dev-num">-</div>
       <div class="gauge-phase" id="zd-dev-phase">-</div>
@@ -314,7 +318,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','Hiragino Sans G
   <div id="yunshi-status" style="text-align:center;padding:20px;color:var(--ink3);font-size:12px">请在「①本位心性」推演后查看</div>
   <div id="yunshi-result" style="display:none">
     <div class="fq-strip" id="fq-bazi" style="flex-wrap:wrap"></div>
-    <div class="sec">主轴十年周期 <span style="font-size:10px;color:var(--ink3)">点击展开年度</span></div>
+    <div class="sec">主轴十年周期 <span style="font-size:10px;color:var(--ink3)" id="fq-dy-hint">点击展开年度 ▸</span></div>
     <div class="fq-strip" id="fq-dayun-strip"></div>
     <div id="fq-ln-panel" class="fq-nest" style="display:none">
       <div style="font-size:10px;font-weight:600;color:var(--ink);margin-bottom:4px" id="fq-ln-crumb"></div>
@@ -331,7 +335,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','Hiragino Sans G
     <div class="sec">三档顺逆时势分</div>
     <div id="three-tier-deviation" style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:8px"></div>
     <div class="gauge-wrap">
-      <div class="gauge-lbl">顺逆时势分（当前年度）</div>
+      <div class="gauge-lbl" id="gauge-lbl">顺逆时势分（当前年度）</div>
       <div id="dev-gauge-arc"></div>
       <div class="gauge-num" id="dev-num">-</div>
       <div class="gauge-phase" id="dev-phase">-</div>
@@ -352,6 +356,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','Hiragino Sans G
     <div id="next3-strategic"></div>
     <div class="sec">顺逆分构成</div>
     <div id="yunshi-reasons"></div>
+    <div class="sec">外缘特征</div>
+    <div id="yunshi-aux"></div>
   </div>
 </div>
 
@@ -362,7 +368,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','Hiragino Sans G
     <div><div style="font-size:13px;font-weight:600">知予 · 本位战略顾问</div><div style="font-size:10px;color:var(--ink3)">基于你的心性图谱数据 · 给出具体建议</div></div>
   </div>
 
-  <div class="zy-notice" id="zy-no-data-notice">请先在「①本位心性」完成推演，知予才能基于你的图谱数据回答。</div>
+  <div class="zy-notice" id="zy-no-data-notice" style="display:none">请先在「①本位心性」完成推演，知予才能基于你的图谱数据回答。</div>
 
   <div id="zy-key-section" style="display:none">
     <div style="display:flex;gap:6px;align-items:center;margin-bottom:8px">
@@ -372,7 +378,21 @@ body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','Hiragino Sans G
     </div>
   </div>
 
-  <div class="zy-pills" id="zy-presets">
+  <div id="zy-ctx-bar" style="display:flex;gap:8px;flex-wrap:wrap;padding:6px 0;margin-bottom:6px;font-size:10px">
+    <label><input type="checkbox" id="zy-ctx-native" checked> 本位心性</label>
+    <label><input type="checkbox" id="zy-ctx-benzhen" checked> 本真心力</label>
+    <label><input type="checkbox" id="zy-ctx-zhongdao" checked> 中道修身</label>
+    <label><input type="checkbox" id="zy-ctx-shiye"> 事业方向</label>
+    <label><input type="checkbox" id="zy-ctx-yunshi" checked> 时势数据</label>
+  </div>
+
+  <div style="display:flex;gap:6px;align-items:center;margin-bottom:8px;font-size:10px">
+    <span style="color:var(--ink3)">模型：</span>
+    <button id="zy-btn-chat" style="padding:3px 10px;border-radius:12px;border:1px solid var(--border);background:var(--ink);color:var(--gold2);cursor:pointer;font-size:10px" onclick="zySetModel('deepseek-chat')">chat · 日常</button>
+    <button id="zy-btn-reasoner" style="padding:3px 10px;border-radius:12px;border:1px solid var(--border);background:var(--s);color:var(--ink3);cursor:pointer;font-size:10px" onclick="zySetModel('deepseek-reasoner')">reasoner · 深度</button>
+  </div>
+
+  <div class="zy-pills" id="zy-presets-grid">
     <div class="zy-pill" onclick="zyAsk(this.textContent)">我的本真心力是什么？</div>
     <div class="zy-pill" onclick="zyAsk(this.textContent)">当前最需要警惕的能量偏差？</div>
     <div class="zy-pill" onclick="zyAsk(this.textContent)">当前该进还是守？</div>
@@ -383,7 +403,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','Hiragino Sans G
 
   <div class="zy-chat">
     <div class="zy-chat-body" id="zy-chat-body">
-      <div class="zy-bubble ai">我是知予。完成心性图谱推演后，我能基于你的时空坐标数据给你具体建议。先去「①本位心性」推演一下，然后回来问我。</div>
+      <div class="zy-bubble ai" id="zy-welcome-msg">我是知予。完成心性图谱推演后，我能基于你的时空坐标数据给你具体建议。先去「①本位心性」推演一下，然后回来问我。</div>
     </div>
     <div class="zy-input-bar">
       <textarea id="zy-input" placeholder="问知予…"></textarea>
