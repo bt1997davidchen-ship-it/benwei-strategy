@@ -14,7 +14,7 @@
 body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;font-size:14px;color:var(--ink);background:#f0ece6;padding:0;min-height:100vh}
 
 /* ── Greeting ── */
-#greeting{background:#1a1410;color:#fff;padding:40px 16px 24px;text-align:center;position:relative;overflow:hidden}
+#greeting{background:#1a1410;color:#fff;padding:52px 16px 44px;text-align:center;position:relative;overflow:hidden;min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center}
 #greeting .orb{position:absolute;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,rgba(160,120,48,.15),transparent);top:-100px;right:-80px;filter:blur(70px);pointer-events:none}
 #greeting .g-date{font-size:11px;color:#e8d49a;letter-spacing:.12em;margin-bottom:4px}
 #greeting .g-sol{font-size:12px;color:rgba(255,255,255,.38);margin-bottom:8px}
@@ -25,9 +25,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','Hiragino Sans G
 #greeting .g-card .g-card-lbl{font-size:10px;color:#e8d49a;margin-bottom:3px}
 #greeting .g-card .g-card-txt{font-size:12px;color:rgba(255,255,255,.6);line-height:1.6}
 
-/* ── Quick Start Button ── */
-.quick-start{padding:16px;text-align:center}
-.quick-start button{width:100%;max-width:400px;padding:16px;background:linear-gradient(135deg,#a07830,#c4a050);border:none;border-radius:14px;color:#0f0d0b;font-size:16px;font-weight:600;letter-spacing:.06em;cursor:pointer}
+/* ── Quick Start Button (inside greeting) ── */
 
 /* ── Tabs ── */
 .tabs{display:flex;overflow-x:auto;background:var(--s);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:50;-webkit-overflow-scrolling:touch}
@@ -139,10 +137,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','Hiragino Sans G
       <div class="g-card-txt" id="g-ftxt"></div>
     </div>
   </div>
-</div>
-
-<div class="quick-start">
-  <button onclick="scrollToApp()">进入本位战略 →</button>
+  <div style="margin-top:20px">
+    <button onclick="scrollToApp()" style="width:100%;max-width:300px;padding:16px;background:linear-gradient(135deg,#a07830,#c4a050);border:none;border-radius:14px;color:#0f0d0b;font-size:15px;font-weight:600;letter-spacing:.06em;cursor:pointer">进入本位战略 →</button>
+    <div style="font-size:11px;color:rgba(255,255,255,.22);margin-top:8px;cursor:pointer" onclick="scrollToApp()">每次直接进入主界面</div>
+  </div>
 </div>
 
 <!-- ═══════════════ APP ═══════════════ -->
