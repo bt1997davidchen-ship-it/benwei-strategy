@@ -698,7 +698,7 @@ body{background:#f0ece6;display:flex;justify-content:center;padding:20px 10px 60
   <div class="g4" style="margin-bottom:6px">
     <div class="fg"><label>出生时辰</label><select id="ap-hour"></select></div>
     <div class="fg"><label>当前公历年</label><input type="number" id="ap-current-year" value="2026" min="1900" max="2100"></div>
-    <div class="fg" style="grid-column:span 2"><label>&nbsp;</label><button class="btn-primary" onclick="autoPaipan()" style="background:var(--blue);color:#fff;font-size:12px;padding:8px">⟳ 自动推演 → 填入下方</button></div>
+    <div class="fg" style="grid-column:span 2"><label>&nbsp;</label><button class="btn-primary" onclick="autoPaipan()" style="background:var(--blue);color:var(--gold2);font-size:12px;padding:8px">⟳ 自动推演 → 填入下方</button></div>
   </div>
 
   <div class="sec" style="margin-top:4px">图谱四柱（可手动微调）</div>
@@ -935,7 +935,7 @@ body{background:#f0ece6;display:flex;justify-content:center;padding:20px 10px 60
       <div style="display:flex;gap:8px;align-items:center;margin-bottom:8px;flex-wrap:wrap">
         <label style="font-size:11px;color:var(--ink3)">中心年</label>
         <input type="number" id="trend-center-year" value="2026" min="1900" max="2100" style="width:80px;font-size:12px;padding:5px 8px;border:1px solid var(--border);border-radius:var(--r2);background:var(--bg);color:var(--ink);outline:none">
-        <button class="btn-primary" style="width:auto;padding:5px 12px;font-size:11px;margin:0;background:var(--blue);color:#fff" onclick="renderTrendChart()">⟳ 重算</button>
+        <button class="btn-primary" style="width:auto;padding:5px 12px;font-size:11px;margin:0;background:var(--blue);color:var(--gold2)" onclick="renderTrendChart()">⟳ 重算</button>
       </div>
       <div id="trend-chart" style="margin-bottom:8px"></div>
       <div id="trend-stats"></div>
