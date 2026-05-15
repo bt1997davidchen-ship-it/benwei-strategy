@@ -7380,11 +7380,11 @@ function initGreetScreen(){
   // Fortune hint with today's ganzhi
   document.getElementById('sg-ftxt').innerHTML=
     `今日<strong>${gzData.tg}${gzData.dz}日</strong>——完成图谱推演后，知予将为你解读今日时势对心性的影响。`;
-  // Greeting text typewriter
+  // Greeting text - static display (no typewriter animation for mobile compatibility)
   const gi=Math.floor(Date.now()/86400000)%SG_LINES.length;
   const el=document.getElementById('sg-btxt');
-  el.innerHTML='<span class="sg-tcursor"></span>';
-  setTimeout(()=>typeText(el,SG_LINES[gi],0,0,null), 800);
+  const lines=SG_LINES[gi];
+  el.innerHTML=lines.map(function(l){ return l; }).join('<br>')+'<span id="sg-cursor" style="display:inline-block;width:2px;height:13px;background:#c4a050;margin-left:1px;vertical-align:text-bottom;animation:sgblink 1s step-end infinite"></span>';
   spawnParticles();
   // Home screen ganzhi
   document.getElementById('sh-gz').textContent=gzData.tg+gzData.dz;
